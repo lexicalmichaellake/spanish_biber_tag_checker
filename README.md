@@ -8,5 +8,7 @@ Sometimes two words matching your filter criteria appearing consecutively will d
 What you'll find here:
 
 prespart_checker.html: Used for checking present participles.
+
 pastpart_checker.html: Used for checking past participles.
+
 que_checker.html: Used for checking tokens of "que".
