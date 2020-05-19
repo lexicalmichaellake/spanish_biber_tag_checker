@@ -1,0 +1,403 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+  <head>
+  	<meta charset="utf-8">
+    <title>Biber Tag Checking Tool: Spanish Version</title>
+    <link href="style.css" rel="stylesheet">
+    	<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.2.6/d3.min.js"></script>
+		<script src="js/FileSaver.js"></script>
+		<script type="text/javascript">
+			
+	function fixTag1(val) {
+		document.getElementById("field1").value = val;
+		setNewTag();
+	}
+	
+
+	function fixTag2(val) {
+		document.getElementById("field2").value = val;
+		setNewTag();
+	}
+
+	function fixTag3(val) {
+		document.getElementById("field3").value = val;
+		setNewTag();
+	}
+	
+
+	function fixTag4(val) {
+		document.getElementById("field4").value = val;
+		setNewTag();
+	}
+	
+
+	function fixTag5(val) {
+		document.getElementById("field5").value = val;
+		setNewTag();
+	}
+	
+
+	function fixTag6(val) {
+		document.getElementById("field6").value = val;
+		setNewTag();
+	}
+	
+
+	function fixTag7(val) {
+		document.getElementById("field7").value = val;
+		setNewTag();
+	}
+
+	function fixTagMenu1() {
+			document.getElementById("field1").value = 'vm';
+			document.getElementById("field2").value = 'ps';
+			document.getElementById("field3").value = '0s';
+			document.getElementById("field4").value = 'pstn';
+			document.getElementById("field5").value = '';
+			document.getElementById("field7").value = '_nodetnp_';
+			setNewTag();
+		} 
+	function fixTagMenu2() {
+			document.getElementById("field1").value = 'vm';
+			document.getElementById("field2").value = 'ps';
+			document.getElementById("field3").value = '0s';
+			document.getElementById("field4").value = '';
+			document.getElementById("field5").value = '';
+			document.getElementById("field7").value = '_otherpp_';
+			setNewTag();
+		}
+
+	function fixTagMenu3() {
+			document.getElementById("field1").value = 'jms';
+			document.getElementById("field2").value = 'ps';
+			document.getElementById("field3").value = '0s';
+			document.getElementById("field4").value = 'pstn';
+			document.getElementById("field5").value = '';
+			document.getElementById("field7").value = '_postadj_';
+			setNewTag();
+		}
+
+	function fixTagMenu4() {
+			document.getElementById("field1").value = 'vm';
+			document.getElementById("field2").value = 'ps';
+			document.getElementById("field3").value = '0s';
+			document.getElementById("field4").value = 'pstn';
+			document.getElementById("field5").value = '';
+			document.getElementById("field7").value = '_postnompp_';
+			setNewTag();
+		}
+
+	function fixTagMenu5() {
+			document.getElementById("field1").value = 'jfs';
+			document.getElementById("field2").value = 'ps';
+			document.getElementById("field3").value = '0s';
+			document.getElementById("field4").value = '';
+			document.getElementById("field5").value = '';
+			document.getElementById("field7").value = '_preadj_';
+			setNewTag();
+		}
+
+	function fixTagMenu6() {
+			document.getElementById("field1").value = 'jfs';
+			document.getElementById("field2").value = 'ps';
+			document.getElementById("field3").value = '0s';
+			document.getElementById("field4").value = '';
+			document.getElementById("field5").value = '';
+			document.getElementById("field7").value = '_predadj_';
+			setNewTag();
+		}
+
+	function fixTagMenu7() {
+			document.getElementById("field1").value = 'vm';
+			document.getElementById("field2").value = 'ps';
+			document.getElementById("field3").value = '0s';
+			document.getElementById("field4").value = '';
+			document.getElementById("field5").value = '';
+			document.getElementById("field7").value = '_perfect_';
+			setNewTag();
+		}
+
+	function fixTagMenu8() {
+			document.getElementById("field1").value = 'vm';
+			document.getElementById("field2").value = 'ps';
+			document.getElementById("field3").value = '0s';
+			document.getElementById("field4").value = 'psv';
+			document.getElementById("field5").value = '';
+			document.getElementById("field7").value = '_serpsvagntlss_';
+			setNewTag();
+		}
+
+	function fixTagMenu9() {
+			document.getElementById("field1").value = 'vm';
+			document.getElementById("field2").value = 'ps';
+			document.getElementById("field3").value = '0s';
+			document.getElementById("field4").value = 'psv';
+			document.getElementById("field5").value = 'por';
+			document.getElementById("field7").value = '_serpsvpor_';
+			setNewTag();
+		}
+
+	function fixTagMenu10() {
+			document.getElementById("field1").value = 'nms';
+			document.getElementById("field2").value = 'ps';
+			document.getElementById("field3").value = '0s';
+			document.getElementById("field4").value = '';
+			document.getElementById("field5").value = '';
+			document.getElementById("field7").value = '_singn_';
+			setNewTag();
+		}
+
+
+		var current_token = 0;
+		var total_token_count = 0;
+		var filtered_tokens = [];
+		
+		function includeComments(e) {
+			document.getElementById(current_token).setAttribute("data-comments", e.value);
+		}
+		//the Spanish tagset involves seven fields. here and elsewhere, the number of fields has increased accordingly.
+		function setNewTag() {
+			var new_tag = document.getElementById('field1').value + '+' + document.getElementById('field2').value + '+' + document.getElementById('field3').value + '+' + document.getElementById('field4').value + '+' + document.getElementById('field5').value + '+' + document.getElementById('field6').value + '+' + document.getElementById('field7').value + '+' + document.getElementById('field8').value;
+			document.getElementById(current_token).setAttribute('new_biber', new_tag);
+		}
+		
+		function getNewTags(e){
+			new_biber_tags = e.getAttribute('new_biber').split('+');
+			document.getElementById('field1').value = new_biber_tags[0];
+			document.getElementById('field2').value = new_biber_tags[1];
+			document.getElementById('field3').value = new_biber_tags[2];
+			document.getElementById('field4').value = new_biber_tags[3];
+			document.getElementById('field5').value = new_biber_tags[4];
+			document.getElementById('field6').value = new_biber_tags[5];
+			document.getElementById('field7').value = new_biber_tags[6];
+			document.getElementById('field8').value = new_biber_tags[7];
+		}
+		
+		function previous() {
+			document.getElementById(current_token).className = 'conc_highlight';
+			which_token = filtered_tokens.indexOf(Number(current_token));
+			which_token -= 1;
+			if (which_token < 0) {
+				which_token = 0;
+			}
+			current_token = filtered_tokens[which_token];
+			document.getElementById('info_box').innerHTML += current_token;
+			openTag(document.getElementById(current_token));
+			
+		}
+		
+		function next() {
+			document.getElementById(current_token).className = 'conc_highlight';
+			which_token = filtered_tokens.indexOf(Number(current_token));
+			which_token += 1;
+			if (which_token >= filtered_tokens.length) {
+				which_token = filtered_tokens.length - 1;
+			}
+			current_token = filtered_tokens[which_token];
+			openTag(document.getElementById(current_token));
+		}
+		
+		function openTag(e) {
+			document.getElementById(current_token).className = 'conc_highlight';
+			current_token = e.id;
+			e.className = 'main_highlight';
+			token = e.innerHTML;
+			this_text = '';
+			this_text += ' Tags for the token <b>' + token + '</b> ';
+			this_text += '<br>';
+			var biber_tags = e.getAttribute("biber").split("+");
+			this_text += '<table border="1"><tr><td><input type="radio" name="a1" id="a1" value="1" /></td><td>(a) No Change</td><td>($value)</td></tr><tr><td><input type="radio" name="a1" id="a1" value="2" onclick="fixTagMenu1()" onchange="fixTagMenu1()" /></td><td>(b) vm+ps+0s+pstn++!!+</td><td>nodetnp</td></tr><tr><td><input type="radio" name="a1" id="a1" value="3" onclick="fixTagMenu2()"  onchange="fixTagMenu2()" /></td><td>(c) vm+ps+0p++++</td><td>otherpp</td></tr><tr><td><input type="radio" name="a1" id="a1" value="4" onclick="fixTagMenu3()"  onchange="fixTagMenu3()"  /></td><td>(d) jms+ps+0s+pstn++!!+</td><td>postadj</td></tr><tr><td><input type="radio" name="a1" id="a1" value="5"  onclick="fixTagMenu4()"  onchange="fixTagMenu4()"  /></td><td>(e) vm+ps+0p++++</td><td>postnompp</td></tr><tr><td><input type="radio" name="a1" id="a1" value="6"  onclick="fixTagMenu5()"  onchange="fixTagMenu5()"  /></td><td>(f) jfs+ps+0s++++</td><td>preadj</td></tr><tr><td><input type="radio" name="a1" id="a1" value="7"  onclick="fixTagMenu6()"  onchange="fixTagMenu6()"  /></td><td>(g) jfs+ps+0s++++</td><td>predadj</td></tr><tr><td><input type="radio" name="a1" id="a1" value="8"  onclick="fixTagMenu7()"  onchange="fixTagMenu7()"  /></td><td>(h) vm+ps+0s++++</td><td>perfect</td></tr><tr><td><input type="radio" name="a1" id="a1" value="9"  onclick="fixTagMenu8()"  onchange="fixTagMenu8()"  /></td><td>(i) vm+ps+0p+psv+++</td><td>serpsvagntlss</td></tr><tr><td><input type="radio" name="a1" id="a1" value="10"  onclick="fixTagMenu9()"  onchange="fixTagMenu9()"  /></td><td>(j) vm+ps+0s+psv+por++</td><td>serpsvpor</td></tr><tr><td><input type="radio" name="a1" id="a1" value="11"  onclick="fixTagMenu10()"  onchange="fixTagMenu10()"  /></td><td>(l) nms+ps+0s++++</td><td>singn</td></tr></table>';
+			this_text += '<table>';
+			this_text += '<tr><td><form>1: </td><td>' + biber_tags[0] + '</td><td><input type="text" id="field1" onchange="setNewTag();"></td><td><select id="field1fix" onclick="fixTag1(this.value)" onchange="fixTag1(this.value)"><option value = "" onclick="fixTag1(this.value)" onchange="fixTag1(this.value)"></option><option value = "j00" onclick="fixTag1(this.value)" onchange="fixTag1(this.value)">j00</option><option value = "jcp" onclick="fixTag1(this.value)" onchange="fixTag1(this.value)">jcp</option><option value = "jcs" onclick="fixTag1(this.value)" onchange="fixTag1(this.value)">jcs</option><option value = "jfp" onclick="fixTag1(this.value)" onchange="fixTag1(this.value)">jfp</option><option value = "jfs" onclick="fixTag1(this.value)" onchange="fixTag1(this.value)">jfs</option><option value = "jmp" onclick="fixTag1(this.value)" onchange="fixTag1(this.value)">jmp</option><option value = "jms" onclick="fixTag1(this.value)" onchange="fixTag1(this.value)">jms</option><option value = "n" onclick="fixTag1(this.value)" onchange="fixTag1(this.value)">n</option><option value = "n"" onclick="fixTag1(this.value)" onchange="fixTag1(this.value)">n"</option><option value = "n00" onclick="fixTag1(this.value)" onchange="fixTag1(this.value)">n00</option><option value = "ncp" onclick="fixTag1(this.value)" onchange="fixTag1(this.value)">ncp</option><option value = "ncs" onclick="fixTag1(this.value)" onchange="fixTag1(this.value)">ncs</option><option value = "nfp" onclick="fixTag1(this.value)" onchange="fixTag1(this.value)">nfp</option><option value = "nfs" onclick="fixTag1(this.value)" onchange="fixTag1(this.value)">nfs</option><option value = "nmn" onclick="fixTag1(this.value)" onchange="fixTag1(this.value)">nmn</option><option value = "nmp" onclick="fixTag1(this.value)" onchange="fixTag1(this.value)">nmp</option><option value = "nms" onclick="fixTag1(this.value)" onchange="fixTag1(this.value)">nms</option><option value = "v" onclick="fixTag1(this.value)" onchange="fixTag1(this.value)">v</option><option value = "va" onclick="fixTag1(this.value)" onchange="fixTag1(this.value)">va</option><option value = "vm" onclick="fixTag1(this.value)" onchange="fixTag1(this.value)">vm</option></select></td></tr>';
+			this_text += '<tr><td>2: </td><td>' + biber_tags[1] + '</td><td><input type="text" id="field2" onchange="setNewTag();"></td><td><select id="field2fix" onclick="fixTag2(this.value)" onchange="fixTag2(this.value)"><option value = "" onclick="fixTag2(this.value)" onchange="fixTag2(this.value)"></option><option value = "com" onclick="fixTag2(this.value)" onchange="fixTag2(this.value)">com</option><option value = "n0" onclick="fixTag2(this.value)" onchange="fixTag2(this.value)">n0</option><option value = "p0" onclick="fixTag2(this.value)" onchange="fixTag2(this.value)">p0</option><option value = "prop" onclick="fixTag2(this.value)" onchange="fixTag2(this.value)">prop</option><option value = "ps" onclick="fixTag2(this.value)" onchange="fixTag2(this.value)">ps</option></select></td></tr>';
+			this_text += '<tr><td>3: </td><td>' + biber_tags[2] + '</td><td><input type="text" id="field3" onchange="setNewTag();"></td><td><select id="field3fix" onclick="fixTag3(this.value)" onchange="fixTag3(this.value)"><option value = "" onclick="fixTag3(this.value)" onchange="fixTag3(this.value)"></option><option value = "lo" onclick="fixTag3(this.value)" onchange="fixTag3(this.value)">lo</option><option value = "0" onclick="fixTag3(this.value)" onchange="fixTag3(this.value)">0</option><option value = "0p" onclick="fixTag3(this.value)" onchange="fixTag3(this.value)">0p</option><option value = "0s" onclick="fixTag3(this.value)" onchange="fixTag3(this.value)">0s</option></select></td></tr>';
+			this_text += '<tr><td>4: </td><td>' + biber_tags[3] + '</td><td><input type="text" id="field4" onchange="setNewTag();"></td><td><select id="field4fix" onclick="fixTag4(this.value)" onchange="fixTag4(this.value)"><option value = "" onclick="fixTag4(this.value)" onchange="fixTag4(this.value)"></option><option value = "pstn" onclick="fixTag4(this.value)" onchange="fixTag4(this.value)">pstn</option><option value = "psv" onclick="fixTag4(this.value)" onchange="fixTag4(this.value)">psv</option></select></td></tr>';
+			this_text += '<tr><td>5: </td><td>' + biber_tags[4] + '</td><td><input type="text" id="field5" onchange="setNewTag();"></td><td><select id="field5fix" onclick="fixTag5(this.value)" onchange="fixTag5(this.value)"><option value = "" onclick="fixTag5(this.value)" onchange="fixTag5(this.value)"></option><option value = "por" onclick="fixTag5(this.value)" onchange="fixTag5(this.value)">por</option></select></td></tr>';
+			this_text += '<tr><td>6: </td><td>' + biber_tags[5] + '</td><td><input type="text" id="field6" onchange="setNewTag();"></td><td><select id="field6fix" onclick="fixTag6(this.value)" onchange="fixTag6(this.value)"><option value = "" onclick="fixTag6(this.value)" onchange="fixTag6(this.value)"></option><option value = "!!" onclick="fixTag6(this.value)" onchange="fixTag6(this.value)">!!</option><option value = "??" onclick="fixTag6(this.value)" onchange="fixTag6(this.value)">??</option></select></td></tr>';
+			this_text += '<tr><td>7: </td><td>' + biber_tags[6] + '</td><td><input type="text" id="field7" onchange="setNewTag();"></td><td><select id="field7fix" onclick="fixTag7(this.value)" onchange="fixTag7(this.value)"><option value = "" onclick="fixTag7(this.value)" onchange="fixTag7(this.value)"></option><option value = "_colorj_" onclick="fixTag7(this.value)" onchange="fixTag7(this.value)">_colorj_</option><option value = "_emphpos_singn_" onclick="fixTag7(this.value)" onchange="fixTag7(this.value)">_emphpos_singn_</option><option value = "_exhaber_" onclick="fixTag7(this.value)" onchange="fixTag7(this.value)">_exhaber_</option><option value = "_haberque_" onclick="fixTag7(this.value)" onchange="fixTag7(this.value)">_haberque_</option><option value = "_ira_" onclick="fixTag7(this.value)" onchange="fixTag7(this.value)">_ira_</option><option value = "_mvestar_vexist_" onclick="fixTag7(this.value)" onchange="fixTag7(this.value)">_mvestar_vexist_</option><option value = "_mvser_vexist_" onclick="fixTag7(this.value)" onchange="fixTag7(this.value)">_mvser_vexist_</option><option value = "_mvser_vexist_esjqueind_" onclick="fixTag7(this.value)" onchange="fixTag7(this.value)">_mvser_vexist_esjqueind_</option><option value = "_mvser_vexist_esjquesubj_" onclick="fixTag7(this.value)" onchange="fixTag7(this.value)">_mvser_vexist_esjquesubj_</option><option value = "_nodetnp_" onclick="fixTag7(this.value)" onchange="fixTag7(this.value)">_nodetnp_</option><option value = "_nodetnp_plurn_" onclick="fixTag7(this.value)" onchange="fixTag7(this.value)">_nodetnp_plurn_</option><option value = "_nodetnp_singn_" onclick="fixTag7(this.value)" onchange="fixTag7(this.value)">_nodetnp_singn_</option><option value = "_otherpp_" onclick="fixTag7(this.value)" onchange="fixTag7(this.value)">_otherpp_</option><option value = "_otherpp_othobligv_" onclick="fixTag7(this.value)" onchange="fixTag7(this.value)">_otherpp_othobligv_</option><option value = "_otherpp_serpsvagntlss_" onclick="fixTag7(this.value)" onchange="fixTag7(this.value)">_otherpp_serpsvagntlss_</option><option value = "_otherpp_vaspect_" onclick="fixTag7(this.value)" onchange="fixTag7(this.value)">_otherpp_vaspect_</option><option value = "_otherpp_vcommun_" onclick="fixTag7(this.value)" onchange="fixTag7(this.value)">_otherpp_vcommun_</option><option value = "_otherpp_vdes_" onclick="fixTag7(this.value)" onchange="fixTag7(this.value)">_otherpp_vdes_</option><option value = "_otherpp_vdes_othobligv_" onclick="fixTag7(this.value)" onchange="fixTag7(this.value)">_otherpp_vdes_othobligv_</option><option value = "_otherpp_vexist_" onclick="fixTag7(this.value)" onchange="fixTag7(this.value)">_otherpp_vexist_</option><option value = "_otherpp_vfacil_" onclick="fixTag7(this.value)" onchange="fixTag7(this.value)">_otherpp_vfacil_</option><option value = "_otherpp_vment_" onclick="fixTag7(this.value)" onchange="fixTag7(this.value)">_otherpp_vment_</option><option value = "_otherpp_voccur_" onclick="fixTag7(this.value)" onchange="fixTag7(this.value)">_otherpp_voccur_</option><option value = "_othobligv_" onclick="fixTag7(this.value)" onchange="fixTag7(this.value)">_othobligv_</option><option value = "_perfect_" onclick="fixTag7(this.value)" onchange="fixTag7(this.value)">_perfect_</option><option value = "_plurn_" onclick="fixTag7(this.value)" onchange="fixTag7(this.value)">_plurn_</option><option value = "_postadj_" onclick="fixTag7(this.value)" onchange="fixTag7(this.value)">_postadj_</option><option value = "_postadj_colorj_" onclick="fixTag7(this.value)" onchange="fixTag7(this.value)">_postadj_colorj_</option><option value = "_postadj_preadj_" onclick="fixTag7(this.value)" onchange="fixTag7(this.value)">_postadj_preadj_</option><option value = "_postnompp_" onclick="fixTag7(this.value)" onchange="fixTag7(this.value)">_postnompp_</option><option value = "_postnompp_othobligv_" onclick="fixTag7(this.value)" onchange="fixTag7(this.value)">_postnompp_othobligv_</option><option value = "_postnompp_serpsvagntlss_" onclick="fixTag7(this.value)" onchange="fixTag7(this.value)">_postnompp_serpsvagntlss_</option><option value = "_postnompp_serpsvagntlss_vdes_" onclick="fixTag7(this.value)" onchange="fixTag7(this.value)">_postnompp_serpsvagntlss_vdes_</option><option value = "_postnompp_serpsvagntlss_vment_" onclick="fixTag7(this.value)" onchange="fixTag7(this.value)">_postnompp_serpsvagntlss_vment_</option><option value = "_postnompp_serpsvpor_" onclick="fixTag7(this.value)" onchange="fixTag7(this.value)">_postnompp_serpsvpor_</option><option value = "_postnompp_serpsvpor_vdes_" onclick="fixTag7(this.value)" onchange="fixTag7(this.value)">_postnompp_serpsvpor_vdes_</option><option value = "_postnompp_serpsvpor_vment_" onclick="fixTag7(this.value)" onchange="fixTag7(this.value)">_postnompp_serpsvpor_vment_</option><option value = "_postnompp_vaspect_" onclick="fixTag7(this.value)" onchange="fixTag7(this.value)">_postnompp_vaspect_</option><option value = "_postnompp_vcommun_" onclick="fixTag7(this.value)" onchange="fixTag7(this.value)">_postnompp_vcommun_</option><option value = "_postnompp_vdes_" onclick="fixTag7(this.value)" onchange="fixTag7(this.value)">_postnompp_vdes_</option><option value = "_postnompp_vexist_" onclick="fixTag7(this.value)" onchange="fixTag7(this.value)">_postnompp_vexist_</option><option value = "_postnompp_vfacil_" onclick="fixTag7(this.value)" onchange="fixTag7(this.value)">_postnompp_vfacil_</option><option value = "_postnompp_vment_" onclick="fixTag7(this.value)" onchange="fixTag7(this.value)">_postnompp_vment_</option><option value = "_postnompp_voccur_" onclick="fixTag7(this.value)" onchange="fixTag7(this.value)">_postnompp_voccur_</option><option value = "_preadj_" onclick="fixTag7(this.value)" onchange="fixTag7(this.value)">_preadj_</option><option value = "_predadj_" onclick="fixTag7(this.value)" onchange="fixTag7(this.value)">_predadj_</option><option value = "_predadj_esjinf_" onclick="fixTag7(this.value)" onchange="fixTag7(this.value)">_predadj_esjinf_</option><option value = "_predadj_preadj_" onclick="fixTag7(this.value)" onchange="fixTag7(this.value)">_predadj_preadj_</option><option value = "_preter_" onclick="fixTag7(this.value)" onchange="fixTag7(this.value)">_preter_</option><option value = "_preter_exhaber_" onclick="fixTag7(this.value)" onchange="fixTag7(this.value)">_preter_exhaber_</option><option value = "_preter_mvestar_vexist_" onclick="fixTag7(this.value)" onchange="fixTag7(this.value)">_preter_mvestar_vexist_</option><option value = "_preter_mvser_vexist_" onclick="fixTag7(this.value)" onchange="fixTag7(this.value)">_preter_mvser_vexist_</option><option value = "_preter_othobligv_" onclick="fixTag7(this.value)" onchange="fixTag7(this.value)">_preter_othobligv_</option><option value = "_preter_perfect_" onclick="fixTag7(this.value)" onchange="fixTag7(this.value)">_preter_perfect_</option><option value = "_preter_progres_vexist_" onclick="fixTag7(this.value)" onchange="fixTag7(this.value)">_preter_progres_vexist_</option><option value = "_preter_serpsvagntlss_" onclick="fixTag7(this.value)" onchange="fixTag7(this.value)">_preter_serpsvagntlss_</option><option value = "_preter_serpsvagntlss_mvestar_vexist_" onclick="fixTag7(this.value)" onchange="fixTag7(this.value)">_preter_serpsvagntlss_mvestar_vexist_</option><option value = "_preter_serpsvagntlss_othobligv_" onclick="fixTag7(this.value)" onchange="fixTag7(this.value)">_preter_serpsvagntlss_othobligv_</option><option value = "_preter_serpsvagntlss_vaspect_" onclick="fixTag7(this.value)" onchange="fixTag7(this.value)">_preter_serpsvagntlss_vaspect_</option><option value = "_preter_serpsvagntlss_vcommun_" onclick="fixTag7(this.value)" onchange="fixTag7(this.value)">_preter_serpsvagntlss_vcommun_</option><option value = "_preter_serpsvagntlss_vdes_" onclick="fixTag7(this.value)" onchange="fixTag7(this.value)">_preter_serpsvagntlss_vdes_</option><option value = "_preter_serpsvagntlss_vexist_" onclick="fixTag7(this.value)" onchange="fixTag7(this.value)">_preter_serpsvagntlss_vexist_</option><option value = "_preter_serpsvagntlss_vfacil_" onclick="fixTag7(this.value)" onchange="fixTag7(this.value)">_preter_serpsvagntlss_vfacil_</option><option value = "_preter_serpsvagntlss_vment_" onclick="fixTag7(this.value)" onchange="fixTag7(this.value)">_preter_serpsvagntlss_vment_</option><option value = "_preter_serpsvagntlss_voccur_" onclick="fixTag7(this.value)" onchange="fixTag7(this.value)">_preter_serpsvagntlss_voccur_</option><option value = "_preter_serpsvpor_" onclick="fixTag7(this.value)" onchange="fixTag7(this.value)">_preter_serpsvpor_</option><option value = "_preter_serpsvpor_othobligv_" onclick="fixTag7(this.value)" onchange="fixTag7(this.value)">_preter_serpsvpor_othobligv_</option><option value = "_preter_serpsvpor_vcommun_" onclick="fixTag7(this.value)" onchange="fixTag7(this.value)">_preter_serpsvpor_vcommun_</option><option value = "_preter_serpsvpor_vdes_" onclick="fixTag7(this.value)" onchange="fixTag7(this.value)">_preter_serpsvpor_vdes_</option><option value = "_preter_serpsvpor_vexist_" onclick="fixTag7(this.value)" onchange="fixTag7(this.value)">_preter_serpsvpor_vexist_</option><option value = "_preter_serpsvpor_vfacil_" onclick="fixTag7(this.value)" onchange="fixTag7(this.value)">_preter_serpsvpor_vfacil_</option><option value = "_preter_serpsvpor_vment_" onclick="fixTag7(this.value)" onchange="fixTag7(this.value)">_preter_serpsvpor_vment_</option><option value = "_preter_vaspect_" onclick="fixTag7(this.value)" onchange="fixTag7(this.value)">_preter_vaspect_</option><option value = "_preter_vcommun_" onclick="fixTag7(this.value)" onchange="fixTag7(this.value)">_preter_vcommun_</option><option value = "_preter_vdes_" onclick="fixTag7(this.value)" onchange="fixTag7(this.value)">_preter_vdes_</option><option value = "_preter_vdes_othobligv_" onclick="fixTag7(this.value)" onchange="fixTag7(this.value)">_preter_vdes_othobligv_</option><option value = "_preter_vexist_" onclick="fixTag7(this.value)" onchange="fixTag7(this.value)">_preter_vexist_</option><option value = "_preter_vfacil_" onclick="fixTag7(this.value)" onchange="fixTag7(this.value)">_preter_vfacil_</option><option value = "_preter_vment_" onclick="fixTag7(this.value)" onchange="fixTag7(this.value)">_preter_vment_</option><option value = "_preter_voccur_" onclick="fixTag7(this.value)" onchange="fixTag7(this.value)">_preter_voccur_</option><option value = "_progres_vexist_" onclick="fixTag7(this.value)" onchange="fixTag7(this.value)">_progres_vexist_</option><option value = "_propn_" onclick="fixTag7(this.value)" onchange="fixTag7(this.value)">_propn_</option><option value = "_serpsvagntlss_" onclick="fixTag7(this.value)" onchange="fixTag7(this.value)">_serpsvagntlss_</option><option value = "_serpsvagntlss_othobligv_" onclick="fixTag7(this.value)" onchange="fixTag7(this.value)">_serpsvagntlss_othobligv_</option><option value = "_serpsvagntlss_vaspect_" onclick="fixTag7(this.value)" onchange="fixTag7(this.value)">_serpsvagntlss_vaspect_</option><option value = "_serpsvagntlss_vcommun_" onclick="fixTag7(this.value)" onchange="fixTag7(this.value)">_serpsvagntlss_vcommun_</option><option value = "_serpsvagntlss_vdes_" onclick="fixTag7(this.value)" onchange="fixTag7(this.value)">_serpsvagntlss_vdes_</option><option value = "_serpsvagntlss_vexist_" onclick="fixTag7(this.value)" onchange="fixTag7(this.value)">_serpsvagntlss_vexist_</option><option value = "_serpsvagntlss_vfacil_" onclick="fixTag7(this.value)" onchange="fixTag7(this.value)">_serpsvagntlss_vfacil_</option><option value = "_serpsvagntlss_vment_" onclick="fixTag7(this.value)" onchange="fixTag7(this.value)">_serpsvagntlss_vment_</option><option value = "_serpsvagntlss_voccur_" onclick="fixTag7(this.value)" onchange="fixTag7(this.value)">_serpsvagntlss_voccur_</option><option value = "_serpsvpor_" onclick="fixTag7(this.value)" onchange="fixTag7(this.value)">_serpsvpor_</option><option value = "_serpsvpor_vcommun_" onclick="fixTag7(this.value)" onchange="fixTag7(this.value)">_serpsvpor_vcommun_</option><option value = "_serpsvpor_vdes_" onclick="fixTag7(this.value)" onchange="fixTag7(this.value)">_serpsvpor_vdes_</option><option value = "_serpsvpor_vexist_" onclick="fixTag7(this.value)" onchange="fixTag7(this.value)">_serpsvpor_vexist_</option><option value = "_serpsvpor_vfacil_" onclick="fixTag7(this.value)" onchange="fixTag7(this.value)">_serpsvpor_vfacil_</option><option value = "_serpsvpor_vment_" onclick="fixTag7(this.value)" onchange="fixTag7(this.value)">_serpsvpor_vment_</option><option value = "_serpsvpor_voccur_" onclick="fixTag7(this.value)" onchange="fixTag7(this.value)">_serpsvpor_voccur_</option><option value = "_singn_" onclick="fixTag7(this.value)" onchange="fixTag7(this.value)">_singn_</option><option value = "_vaspect_" onclick="fixTag7(this.value)" onchange="fixTag7(this.value)">_vaspect_</option><option value = "_vcommun_" onclick="fixTag7(this.value)" onchange="fixTag7(this.value)">_vcommun_</option><option value = "_vdes_" onclick="fixTag7(this.value)" onchange="fixTag7(this.value)">_vdes_</option><option value = "_vdes_othobligv_" onclick="fixTag7(this.value)" onchange="fixTag7(this.value)">_vdes_othobligv_</option><option value = "_vexist_" onclick="fixTag7(this.value)" onchange="fixTag7(this.value)">_vexist_</option><option value = "_vfacil_" onclick="fixTag7(this.value)" onchange="fixTag7(this.value)">_vfacil_</option><option value = "_vinf_" onclick="fixTag7(this.value)" onchange="fixTag7(this.value)">_vinf_</option><option value = "_vment_" onclick="fixTag7(this.value)" onchange="fixTag7(this.value)">_vment_</option><option value = "_voccur_" onclick="fixTag7(this.value)" onchange="fixTag7(this.value)">_voccur_</option></select></td></tr>';
+			this_text += '<tr><td>8: </td><td>' + biber_tags[7] + '</td><td><input type="text" id="field8" onchange="setNewTag();"></td><td></td></tr>';
+			this_text += '</table>';
+
+
+			this_text += '<hr>Comments:<br><textarea rows="4" cols="30" name="comments" onchange="includeComments(this);">' + e.getAttribute("data-comments")  + '</textarea>';
+			document.getElementById('info_box').innerHTML = this_text;
+			getNewTags(e);
+			
+		}
+		
+		function findNounSequences() {
+		
+			for (var i = 0, length = total_token_count; i < length; i++) {
+				var token = document.getElementById(i);
+				var this_biber = token.getAttribute('biber');
+				//Begins with the tag for feminine and masculine nouns.
+				var filter = /ídas|ída|ídos|ído|idos|idas|ido|ida|ado|ados|ada|adas|abierto|cubierto|dicho|escrito|fecho|hecho|muerto|puesto|podrido|roto|suelto|visto|vuelto|bendito|electo|frito|impreso|maldito|preso|provisto|abierta|cubierta|dicha|escrita|fecha|hecha|muerta|puesta|podrida|rota|suelta|vista|vuelta|bendita|electa|frita|impresa|maldita|presa|provista|abiertos|cubiertos|dichos|escritos|fechos|hechos|muertos|puestos|podridos|rotos|sueltos|vistos|vueltos|benditos|electos|fritos|impresos|malditos|presos|provistos|abiertas|cubiertas|dichas|escritas|fechas|hechas|muertas|puestas|podridas|rotas|sueltas|vistas|vueltas|benditas|electas|fritas|impresas|malditas|presas|provistas/
+				//if current token is a noun
+				if (this_biber.match(filter)) {
+					//if this is not the last token in the text
+					if (i < total_token_count-1) {
+						var next_token = document.getElementById(i+1);
+						if (next_token != null) {
+							var next_biber = next_token.getAttribute('biber');
+							if (next_biber.match(filter)) {
+								token.className = 'conc_highlight';
+								var old_tags = token.getAttribute('biber').split('+');
+								var new_tag = old_tags[0] + '+' + old_tags[1] + '+' + old_tags[2] + '+' + old_tags[3] + '+' + old_tags[4] + '+' + old_tags[5] + '+' + old_tags[6] + '+' + old_tags[7];
+								token.setAttribute("new_biber", new_tag);
+								token.setAttribute("biber", new_tag);
+								token.setAttribute("target_tag", '1');
+								token.onclick = function() { openTag(this);return false; };
+								filtered_tokens.push(i);
+								filtered_tokens.sort(function(a, b){return a - b}); 
+							}
+						}
+					}
+				}
+			
+			}
+		
+		}
+		
+		function scrollUp(){
+			e = document.getElementById('text_window');
+			e.scrollTop = e.scrollTop - 700;
+		}
+		
+		function scrollDown(){
+			e = document.getElementById('text_window');
+			e.scrollTop = e.scrollTop + 700;
+		}
+		
+		function readText(filePath) {
+		
+				reader = new FileReader();
+				file_name = filePath.files[0].name;
+				var output = ""; //placeholder for text output
+				//filter for target tags, change this regular expression to change filter
+				//This example looks for main verbs.
+				var filter = /ídas|ída|ídos|ído|idos|idas|ido|ida|ado|ados|ada|adas|abierto|cubierto|dicho|escrito|fecho|hecho|muerto|puesto|podrido|roto|suelto|visto|vuelto|bendito|electo|frito|impreso|maldito|preso|provisto|abierta|cubierta|dicha|escrita|fecha|hecha|muerta|puesta|podrida|rota|suelta|vista|vuelta|bendita|electa|frita|impresa|maldita|presa|provista|abiertos|cubiertos|dichos|escritos|fechos|hechos|muertos|puestos|podridos|rotos|sueltos|vistos|vueltos|benditos|electos|fritos|impresos|malditos|presos|provistos|abiertas|cubiertas|dichas|escritas|fechas|hechas|muertas|puestas|podridas|rotas|sueltas|vistas|vueltas|benditas|electas|fritas|impresas|malditas|presas|provistas/;
+				token_nbr = 0;
+				if(filePath.files && filePath.files[0]) {           
+            		reader.onload = function (e) {
+						//the original tagset uses `"` to denote that a tag is part of a phrasal construction. the solution involves replacing `"` with its HTML entity counterpart. Attempts to use the backslash escape character were unsuccessful.
+                		output = e.target.result.replace(/"/g, '&#34;');
+                		var text = '<p>';
+                		var lines = output.split(/\n+/);
+                		// for every line in the text
+                		for (i = 0; i < lines.length; i++) {
+                			var elements = lines[i].split(/\s/);
+                			if (elements.length > 1) {
+                				var biber_tag = elements[1].substr(1);
+                				if (lines[i].match(filter)) {
+                					filtered_tokens.push(token_nbr);
+									if (elements[0] == '<p>') {
+										text = text + '</p>';
+										text = text + '<p><a href="#" id="' + token_nbr + '" biber="' + biber_tag + '" new_biber="' + biber_tag + '" target_tag="1" class="conc_highlight" data-comments="" onclick="openTag(this);return false;">&lt;p&gt;</a></p>';
+										token_nbr += 1;
+										text = text + '<p>';
+									} else if (elements[0] == '<h>') {
+										text = text + '<p><a href="#" id="' + token_nbr + '" biber="' + biber_tag + '" new_biber="' + biber_tag + '" target_tag="1" class="conc_highlight" data-comments="" onclick="openTag(this);return false;">&lt;h&gt;</a></p>';
+										token_nbr += 1;
+									} else {
+										text = text + '<a href="#" id="' + token_nbr + '" biber="' + biber_tag + '" new_biber="' + biber_tag + '" target_tag="1" class="conc_highlight" data-comments="" onclick="openTag(this);return false;">' + elements[0] + "</a> ";
+										token_nbr += 1;
+									}
+								} else {
+									text = text + '<a href="#" id="' + token_nbr + '" biber="' + biber_tag + '" title="' + biber_tag + '" new_biber="" target_tag="0" class="not_highlight" data-comments="" onclick="return false;">' + elements[0] + "</a> ";
+									token_nbr += 1;		
+								}
+							} 
+                			
+                		}
+                		document.getElementById('text_window').innerHTML = text;
+                		total_token_count = token_nbr;
+                		document.getElementById('filename').value = file_name.replace(/\.txt/g,'') + "_tagchecked.txt";
+                		findNounSequences();
+                		//document.getElementById('info_box').innerHTML += filtered_tokens;
+                		if (filtered_tokens.length > 1) {
+                			document.getElementById('button_bar').style.display = 'inline';
+                			current_token = filtered_tokens[0];
+							openTag(document.getElementById(current_token));
+						}
+					};
+				reader.readAsText(filePath.files[0]);
+                };
+                
+        }
+        
+        function exportData() {
+		        var content = "Token\tOriginal_Biber_Tag\tNew_Biber_Tag\ttarget_feature\tmodified?\tComments\r\n";
+				
+						
+				for (var i = 0, length = total_token_count; i < length; i++) {
+				
+					var token = document.getElementById(i);
+				
+					if (token != null) {
+						clean_token = token.innerHTML.replace(/&lt;/g,'<');
+						clean_token = clean_token.replace(/&gt;/g,'>');
+						var old_tag = token.getAttribute('biber');
+						var new_tag =  token.getAttribute('new_biber');
+						var modified = 1;
+						if (old_tag == new_tag || new_tag == '') {modified = 0;};
+						content +=  clean_token + "\t" + old_tag + "\t" + new_tag + "\t" + token.getAttribute("target_tag") + "\t" + modified + "\t" + token.getAttribute("data-comments").replace(/\n/g,' ') + "\r\n";
+						} 
+					}
+			
+				var blob = new Blob([content], {type: "text/plain;charset=utf-8"});
+				var newfilename = document.getElementById('filename').value;
+				if (newfilename == '') {
+					newfilename = 'output.txt';
+				}
+				saveAs(blob, newfilename);
+	
+		    }
+
+</script>
+
+  </head>
+  <body>
+	<div id="top_bar" class="top_bar">
+		<table width="100%">
+			<tr>
+			<td><img src="images/crow_logo.png" width="50"></td>
+			<td>
+				<table>
+					<tr>
+						<td>Open File:</td>
+					</tr>
+					<tr>
+						<td>
+							<input type="file" onchange='readText(this)' />
+						</td>
+					</tr>
+				</table>
+			</td>
+			
+			<td><h2>Biber Tag Checking Tool: Spanish Version </h2></td>
+			<td><div id="cit_info"></div></td>
+			<td><a href="#" class="button" onclick="location.reload();">Clear Tool</a></td>
+			
+			</tr>
+		</table>
+			
+	</div>
+	
+	<div id="text_window" class="text_window"></div>
+	<div id="info_box" class="info_box"></div>
+	
+	<div id="bottom_bar" class="bottom_bar">
+	
+		<form><a href="#" class="button" onclick="exportData();return false;">Download File</a> File name: <input type="text" id="filename" size="50"> 
+		
+		</form>
+		
+	</div>
+	
+	<div id="button_bar" class="button_bar">
+	<a href="#" class="button" onclick="scrollUp();return false;"> &uarr;</a> <a href="#" class="button" onclick="scrollDown();return false;">&darr;</a>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="button" onclick="previous();return false;"> &lt;&lt; previous token </a> <a href="#" class="button" onclick="next();return false;"> next token &gt;&gt; </a>
+	
+	</div>
+  </body>
+</html>	
