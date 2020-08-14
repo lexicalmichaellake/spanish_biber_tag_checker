@@ -12,3 +12,5 @@ prespart_checker.html: Used for checking present participles.
 pastpart_checker.html: Used for checking past participles.
 
 que_checker.html: Used for checking tokens of "que".
+
+Testfiles/: a raw and tagged version of the first chapter of El árbol de la ciencia by Pío Baroja, obtained from gutenberg.org.
